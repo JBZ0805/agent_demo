@@ -1,4 +1,4 @@
-from git_commit_push_tool import git_commit_push
+from utils.git_commit_push_tool import git_commit_push
 def create_git_commit_push_agent():
     agent = {
         "name": "create_git_commit_push_agent",

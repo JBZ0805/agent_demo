@@ -5,7 +5,6 @@ from deepagents.backends import FilesystemBackend
 from agent.create_file_agent import create_file_agent
 from agent.create_pr_agent import create_pr_agent
 from agent.git_commit_push_agent import create_git_commit_push_agent
-import os
 
 load_dotenv()
 
@@ -18,11 +17,11 @@ def create_agent():
     model="gpt-5.2", base_url="https://api.vectorengine.ai/v1"
     )
     # 子agent
-    create_file_agent  = create_file_agent()
-    create_pr_agent = create_pr_agent()
-    create_git_commit_push_agent = create_git_commit_push_agent()
+    file_agent  = create_file_agent()
+    pr_agent = create_pr_agent()
+    git_commit_push_agent = create_git_commit_push_agent()
 
-    sub_agents = [create_file_agent, create_pr_agent, create_git_commit_push_agent]
+    sub_agents = [file_agent, pr_agent, git_commit_push_agent]
 
     # 主agent
     agent  = create_deep_agent(
