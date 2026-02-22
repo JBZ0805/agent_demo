@@ -1,16 +1,11 @@
 from deepagents import create_deep_agent
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from deepagents.backends import FilesystemBackend
 from agent.create_file_agent import create_file_agent
 from agent.create_pr_agent import create_pr_agent
 from agent.git_commit_push_agent import create_git_commit_push_agent
 
 load_dotenv()
-
-root_dir ="D:\\workspace\\PythonWorkSpace\\study\\test"
-
-backend=FilesystemBackend(root_dir=root_dir,virtual_mode=False)
 
 def create_agent():
     model = ChatOpenAI(
@@ -27,7 +22,6 @@ def create_agent():
     agent  = create_deep_agent(
         model=model,
         system_prompt="你是一个智能助手。用来创建文件并将文件提交到远程GIT仓库并创建PR等操作。",
-        backend=backend,
         subagents=sub_agents
     )
 
