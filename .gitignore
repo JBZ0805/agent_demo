@@ -1,0 +1,2 @@
+# Ignore Python bytecode files in utils/__pycache__
+__pycache__/

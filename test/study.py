@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-root_dir ="D:\\workspace\\PythonWorkSpace\\study\\test"
+root_dir ="D:\\workspace\\PythonWorkSpace\\agent_demo\\test"
 
 backend=FilesystemBackend(root_dir=root_dir,virtual_mode=False)
 
@@ -14,6 +14,7 @@ def _safe_path(file_path: str) -> str:
     """
     强制所有路径限制在 root_dir 内部
     """
+    print(f"准备创建文件：{file_path}")
     # 1️⃣ 去掉开头的 / 或 \
     file_path = file_path.lstrip("/\\")
         
