@@ -1,9 +1,16 @@
 from deepagents.backends import FilesystemBackend
 from langchain_openai import ChatOpenAI
 import os
+import tempfile
+from git import Repo
 
-root_dir ="D:\\workspace\\PythonWorkSpace\\agent_demo"
+root_dir = tempfile.mkdtemp()
 backend=FilesystemBackend(root_dir=root_dir,virtual_mode=False)
+repo = None;
+
+def git_clone_project(owner, repo_name):
+    clone_url = f"https://github.com/{owner}/{repo_name}.git"
+    Repo.clone_from(clone_url,root_dir)
 
 def _safe_path(file_path: str) -> str:
     """
@@ -24,6 +31,9 @@ def _safe_path(file_path: str) -> str:
 
     if not full_path.startswith(root_dir_norm):
         raise ValueError(f"非法路径访问: {file_path}")
+    print("临时文件夹为：",root_dir)
+    git_clone_project(os.getenv("GITHUB_REPO_OWNER"), os.getenv("GITHUB_REPO_NAME"))
+    print("工程已经clone完成。")
     return full_path
 
 def create_file(file_path: str, content: str):

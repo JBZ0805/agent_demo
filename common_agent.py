@@ -22,11 +22,11 @@ def create_agent():
     # 主agent
     agent  = create_deep_agent(
         model=model,
-        system_prompt="你是一个智能助手。不要直接回复创建成功。必须调用子agent。创建文件必须调用file_agent，提交代码必须调用git_commit_push_agent，创建PR必须调用create_pr_agent。",
+        system_prompt="你是一个智能助手。不要直接回复创建成功。必须要调用子agent。注意子agent的调用顺序，不要并行执行子agent。要先调用创建文件的agent，文件创建完之后再调用提交代码的agent，最后调用创建PR的agent。",
         subagents=sub_agents
     )
 
-    result = agent.invoke({"messages": [{"role": "user", "content": "请创建一个markdown格式的文件，文件名为demo，里面的内容为hell world。创建完成后提交代码并推送到远程仓库feature/test，最后创建一个PR。Pr的标题为Add demo file，内容为This PR adds a demo file."}]})
+    result = agent.invoke({"messages": [{"role": "user", "content": "请创建一个markdown格式的文件，文件名为test2，里面的内容为hello world1。创建完成后提交代码并推送到远程仓库feature/agent_test_fix_one，最后创建一个PR。Pr的标题为AI自己生成的文件，内容为这是一个AI生成的文件。"}]})
     # 打印Agent的响应
     print(result)
     print("============================")
